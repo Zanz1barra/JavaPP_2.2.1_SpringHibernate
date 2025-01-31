@@ -46,6 +46,6 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car: Model " + getModel() + ", Series " + getSeries();
+        return "Model: " + getModel() + "; Series: " + getSeries();
     }
 }
