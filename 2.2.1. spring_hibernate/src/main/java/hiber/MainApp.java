@@ -55,6 +55,21 @@ public class MainApp {
             System.out.println("Car = " + user.getCar());
         }
 
+        System.out.println();
+        int seriesCriteria = 999;
+        String modelCriteria = "Leeedom";
+        User findedUser = userService.findUserByCar(seriesCriteria, modelCriteria);
+        if (findedUser == null) {
+            System.out.println("User with Car (Model: " + modelCriteria + "; Series: " + seriesCriteria + ") not found");
+        } else {
+            System.out.println("User with Car (Model: " + modelCriteria + "; Series: " + seriesCriteria + ") founded:");
+            System.out.println("    Id = " + findedUser.getId());
+            System.out.println("    First Name = " + findedUser.getFirstName());
+            System.out.println("    Last Name = " + findedUser.getLastName());
+            System.out.println("    Email = " + findedUser.getEmail());
+            System.out.println("    Car = " + findedUser.getCar());
+        }
+
         context.close();
     }
 }
