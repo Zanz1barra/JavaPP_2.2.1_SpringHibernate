@@ -3,27 +3,35 @@ package hiber.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "cars")
 public class Car {
+
     @Id
+    @Column(name = "user_id")
+    private Long id;
+
     @Column(name = "series")
-    int series;
+    private Long series;
 
     @Column
-    String model;
+    private String model;
 
     @OneToOne
-    User user;
+    @MapsId
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Car() {
 
     }
 
-    public Car(String model, int series) {
+    public Car(String model, Long series) {
         setSeries(series);
         setModel(model);
     }
@@ -36,12 +44,20 @@ public class Car {
         this.model = model;
     }
 
-    public int getSeries() {
+    public Long getSeries() {
         return series;
     }
 
-    public void setSeries(int series) {
+    public void setSeries(Long series) {
         this.series = series;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

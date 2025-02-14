@@ -1,14 +1,13 @@
 package hiber.model;
 
-import org.hibernate.annotations.Cascade;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +15,8 @@ import javax.persistence.Table;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "name")
@@ -28,9 +28,8 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @OneToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @JoinColumn(name = "series")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Car car;
 
     public User() {}
@@ -83,6 +82,15 @@ public class User {
     }
 
     public void setCar(Car car) {
+        car.setUser(this);
         this.car = car;
+    }
+
+    public String toString() {
+        return "Id         = " + this.getId() + "\n" +
+                "First Name = " + this.getFirstName() + "\n" +
+                "Last Name  = " + this.getLastName() + "\n" +
+                "Email      = " + this.getEmail() + "\n" +
+                "Car        = " + this.getCar();
     }
 }

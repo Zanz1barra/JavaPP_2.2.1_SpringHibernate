@@ -29,7 +29,7 @@ public class UserServiceImp implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public User findUserByCar(int carSeries, String carModel) {
+    public User findUserByCar(Long carSeries, String carModel) {
         return userDao.findUserByCar(carSeries, carModel);
     }
 
